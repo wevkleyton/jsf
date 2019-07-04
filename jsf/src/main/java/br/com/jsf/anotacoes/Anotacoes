@@ -1,2 +1,19 @@
 
-Os Principaos escopes do Jsf
+# Os Principaos escopes do Jsf
+@NoneScoped -> o bean será instanciado a cada vez que for referenciado.
+
+@RequestScoped (Padrão) -> tem vida curta, começando quando é referenciado em uma unica requisição http e
+ terminando quando a resposta e enviada de volta ao cliente.
+
+@ViewScoped -> a instancia permanece até que o usuario navegue para uma proxima pagina.
+
+@SsessionScoped -> Mantem a instancia durante diversas requisições e até mesmo nevegação entre paginas,
+ até que a sessão do usuario seja invalidada ou o tempo  limite seja atingido. Cada usuario possui
+ sua sessão de navegação, portanto, os objectos não são compartilhados entre os usuarios.
+ 
+ @ApplicationScoped -> mantém a instancia durante todo o tempo de execução daaplicação. É um scopo que  compartilha os objectos para 
+ todos os usuario do sistema
+ 
+ -----------------------------------------
+ 
+ 
