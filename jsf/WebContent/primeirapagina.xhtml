@@ -9,15 +9,16 @@
 <h:body>
 	<h:form id="formPessoa">
 		Nome:
-		<h:inputText id="campoNome" value="#{pessoaBean.nome}"></h:inputText>
+		<h:inputText id="campoNome"  value="#{pessoaBean.nome}"></h:inputText>
 		<br />
-		Sobre Nome
-		<h:inputText id="sobrenome" value="#{pessoaBean.sobreNome}"></h:inputText>
+		<h:commandButton id="btDeAcao" binding="#{pessoaBean.commandButton}"
+			value="Adicionar Nome" action="#{pessoaBean.addNome}"></h:commandButton>
 		<br />
-		<h:commandButton id="btDeAcao" value="Mostra Nome Completo"
-			action="#{pessoaBean.mostrarNome}"></h:commandButton>
-		<br />
-		<h:outputText id="nomeCompleto" value="#{pessoaBean.nomeCompleto}"></h:outputText>
+		<h:dataTable value="#{pessoaBean.nomes}" var="nome">
+			<h:column>
+				<h:outputText value="#{nome}"></h:outputText>
+			</h:column>
+		</h:dataTable>
 	</h:form>
 </h:body>
 </html>
