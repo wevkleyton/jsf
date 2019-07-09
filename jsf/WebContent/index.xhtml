@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<head>
+	<title>JSF</title>
+	<script>
+		function alterarValorDoCampo() {
+			alert('clicou')
+		}
+	</script>
+</head>
+<h:body>
+	<h:form id="formPessoa">
+		<h1>Olá JSF pagina index.jsf</h1>
+		
+		<br/>
+		<br/>
+		<h:inputText id="nome"></h:inputText>
+		<h:commandButton id="alerta"  value="clicar" onclick="alterarValorDoCampo;"></h:commandButton>
+		<br/>
+		<br/>
+		<h:commandButton value="Navegar" action="primeirapagina"></h:commandButton>
+		
+	</h:form>
+</h:body>
+</html>

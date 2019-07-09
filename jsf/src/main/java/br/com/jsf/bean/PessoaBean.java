@@ -21,8 +21,9 @@ public class PessoaBean {
 		nomes.add(nome);
 		if (nomes.size() > 2) {
 			commandButton.setDisabled(true);
+			return "paginanavagada";
 		}
-		return "";
+		return ""; // null ou vazio fica na mesma pagina - > outcome
 	}
 	
 	public void setCommandButton(HtmlCommandButton commandButton) {
