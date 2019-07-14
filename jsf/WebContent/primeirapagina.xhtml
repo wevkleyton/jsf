@@ -1,24 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:body>
 	<title>JSF</title>
 </h:body>
 <h:body>
 	<h:form id="formPessoa">
-		Nome:
-		<h:inputText id="campoNome"  value="#{pessoaBean.nome}"></h:inputText>
-		<br />
-		<h:commandButton id="btDeAcao" binding="#{pessoaBean.commandButton}"
-			value="Adicionar Nome" action="#{pessoaBean.addNome}"></h:commandButton>
-		<br />
-		<h:dataTable value="#{pessoaBean.nomes}" var="nome">
+		<h:form id="pessoaInf">
+			<h:outputLabel value="Id:" />
+			<h:inputText value="#{pessoaBean.pessoa.id}" readonly="true" />
+			<br />
+			<h:outputLabel value="Nome:" />
+			<h:inputText id="nome" value="#{pessoaBean.pessoa.nome}" />
+			<br />
+			<h:outputLabel value="Sobre Nome:" />
+			<h:inputText id="sobrenome" value="#{pessoaBean.pessoa.sobrenome}" />
+			<br />
+			<h:outputLabel value="Idade:" />
+			<h:inputText id="idade" value="#{pessoaBean.pessoa.idade}" />
+			<!-- <br />
+			<h:outputLabel value="Data Nascimento:" />
+			<h:inutText id="dtnascimento"	value="#{pessoaBean.pessoa.dataNascimento}" /> -->
+			<br />
+			<h:commandButton value="Novo" action="#{pessoaBean.novo}" />
+			<h:commandButton value="Salvar" action="#{pessoaBean.salvar}" />
+			<h:commandButton value="Modificar" action="#{pessoaBean.modificar}" />
+			<br />
+		</h:form>
+		<h:dataTable value="#{pessoaBean.pessoas}" var="pessoas">
 			<h:column>
-				<h:outputText value="#{nome}"></h:outputText>
+				<h:outputText title="" value="#{pessoas.id}" />
+			</h:column>
+			<h:column>
+				<h:outputText title="Nome" value="#{pessoas.nome}" />
+			</h:column>
+			<h:column>
+				<h:outputText title="Sobre Nome" value="#{pessoas.sobrenome}" />
+			</h:column>
+			<h:column>
+				<h:outputText title="Idade" value="#{pessoas.idade}" />
+			</h:column>
+			<h:column>
+				<h:commandLink value="Editar">
+					<f:setPropertyActionListener value="#{pessoas}"
+						target="#{pessoaBean.pessoa}" />
+				</h:commandLink>
+			</h:column>
+			<h:column>
+				<h:commandLink value="Excluir" action="#{pessoaBean.delete}">
+					<f:setPropertyActionListener value="#{pessoas}"
+						target="#{pessoaBean.pessoa}" />
+				</h:commandLink>
 			</h:column>
 		</h:dataTable>
+
 	</h:form>
 </h:body>
 </html>

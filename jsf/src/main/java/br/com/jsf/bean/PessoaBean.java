@@ -3,52 +3,59 @@ package br.com.jsf.bean;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.component.html.HtmlCommandButton;
+
+import br.com.jsf.dao.DaoGeneric;
+import br.com.jsf.entidades.Pessoa;
 
 @ViewScoped
 @ManagedBean(name = "pessoaBean")
 public class PessoaBean {
+	private Pessoa pessoa = new Pessoa();
+	private DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
+	private List<Pessoa> pessoas = new ArrayList<Pessoa>();
 
-	private String nome;
-	
-	private HtmlCommandButton commandButton;
-
-	private List<String> nomes = new ArrayList<String>();
-
-	public String addNome() {
-		nomes.add(nome);
-		if (nomes.size() > 2) {
-			commandButton.setDisabled(true);
-			return "paginanavagada";
-		}
-		return ""; // null ou vazio fica na mesma pagina - > outcome
-	}
-	
-	public void setCommandButton(HtmlCommandButton commandButton) {
-		this.commandButton = commandButton;
-	}
-	
-	public HtmlCommandButton getCommandButton() {
-		return commandButton;
+	public String salvar() {
+		daoGeneric.salvar(pessoa);
+		pessoa = new Pessoa();
+		carregaPessoas();
+		return "";
 	}
 
-	public List<String> getNomes() {
-		return nomes;
+	public String modificar() {
+		pessoa = daoGeneric.merge(pessoa);
+		carregaPessoas();
+		return "";
 	}
 
-	public void setNomes(List<String> nomes) {
-		this.nomes = nomes;
+	@PostConstruct
+	public void carregaPessoas() {
+		pessoas = daoGeneric.getListEntity(Pessoa.class);
 	}
 
-	public String getNome() {
-		return nome;
+	public String novo() {
+		pessoa = new Pessoa();
+		return "";
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public String delete() {
+		daoGeneric.deleteById(pessoa);
+		novo();
+		return "";
 	}
 
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+
+	public List<Pessoa> getPessoas() {
+		return pessoas;
+	}
 
 }
